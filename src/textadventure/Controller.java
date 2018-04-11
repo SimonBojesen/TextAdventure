@@ -16,33 +16,33 @@ public class Controller {
     
     
     public Room mapGen() {
-        Room A2 = new Room("A2 - roperoom","You walk into a `seemingly´ empty room.");
+        Room A2 = new Room("A2 - ropeoom","You walk into a `seemingly´ empty room.");
         Room A3 = new Room("A3","");
         Room A4 = new Room("A4 - Startroom","");
-        Room A5 = new Room("A5","");
+        Room A5 = new Room("A5 - The Ugly Room","You’re looking around…. Hmmm it’s like you have been here before. Cold with ugly walls… Wait, ahhh I’m thinking about my apartment back home! ");
         
         Room B3 = new Room("B3","");
         Room B4 = new Room("B4","");
-        Room B5 = new Room("B5","");
-        Room B6 = new Room("B6","");
+        Room B5 = new Room("B5 - ScrollRoom","There is slightly light piping in from the holes in the walls. There is an item in the middle of the room.  I’ll better inspect it. What is that sound that I hear??");
+        Room B6 = new Room("B6 - The Kitchen","WTF… This room is full of dead rats… Is that human bite-marks? I guess this is the kitchen!!  ");
         
         Room C2 = new Room("C2 - GateKeeper","You walk into a bigass room lit with fire.\n In the middle of the the room is a HUUUGE Dragon with hair like Donald Trump.\n It quickly feels your presence, and sends his minion politicians after you.");
         Room C3 = new Room("C3","");
         Room C4 = new Room("C4","");
-        Room C5 = new Room("C5","");
-        Room C6 = new Room("C6","");
+        Room C5 = new Room("C5 - The bug","The sound is coming closer… I feel I’m on the right path. But they people at built these rooms really need a good designer!! It looks like shit. Ohhh a bug… ummmm foooood…");
+        Room C6 = new Room("C6 - The Wall","What the hell… There are strange lights coming from the south wall. I better check it out. I get the strange feeling that this could be the right way. The south wall also doesn’t look so solid.");
         
         Room D2 = new Room("D2 - WellRoom","In the middle of this new room there is a well. It looks hundreds of years old.");
         Room D3 = new Room("D3","");
         Room D4 = new Room("D4","");
-        Room D5 = new Room("D5","");
-        Room D6 = new Room("D6","");
+        Room D5 = new Room("D5 - The Dark Room","What is that sound and why is this room so dark??!! Well fuck it… Let me feel around. I wish I had a flashlight… Actually I wish I had a million dollars. Oh tiny fairy… WHERE ARE YOU??!!  ");
+        Room D6 = new Room("D6 - The WHY Room","YEEESSSS finally I get a little success. I knew there was something fishy about that wall. Good thing I was listening to my instincts. But why am I still in this shit hole….");
         
         Room E1 = new Room("E1 - BigBoss Donald Trump","You have finally reached the BigBoss Donald Trump Dragon! Good Job! The dragon breathes out flames, telling you to come at him.\nHope you are ready for this. FIGHT.");
         Room E2 = new Room("E2","This room has an eerie feeling to it.");
         Room E3 = new Room("E3","");
         Room E4 = new Room("E4","");
-        Room E6 = new Room("E6","");
+        Room E6 = new Room("E6 - The Secret","Hmmmm… Wait a second… A dead end??!! WTF!!!!! This can’t be right??? There has to bee something I missed along the way. Why would that wall be closed up, if not to hide something? I better explore some more..");
         
         rooms.add(A2);
         rooms.add(A3);
