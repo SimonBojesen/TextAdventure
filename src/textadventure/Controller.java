@@ -170,4 +170,27 @@ public class Controller {
         }
         return movements;
     }  
+    public void move(Player p, TUI t, Controller c) {
+        while (true){
+            t.getRoomDescription(p);
+            ArrayList<String> movements = c.getMoveOptions(p);
+            int i = t.getPlayerInput(movements);
+            
+            switch (i) {
+                case 1: 
+                    p.setCurrentRoom(p.getCurrentRoom().getNorth());
+                    break;
+                case 2: 
+                    p.setCurrentRoom(p.getCurrentRoom().getEast());
+                    break;
+                case 3:
+                    p.setCurrentRoom(p.getCurrentRoom().getSouth());
+                    break;
+                case 4: 
+                    p.setCurrentRoom(p.getCurrentRoom().getWest());
+                    break;
+                    
+            }
+        }
+    }
 }

@@ -5,7 +5,6 @@
  */
 package textadventure;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -19,35 +18,10 @@ public class TextAdventure {
     public static void main(String[] args) {
         Controller c = new Controller();
         TUI tui = new TUI();
-        
         Room startroom = c.mapGen();
         Player p = c.playerGen(startroom);
-
         tui.gameStart(p);
-
-        while (true){
-            tui.getRoomDescription(p);
-            ArrayList<String> movements = c.getMoveOptions(p);
-            int i = tui.getPlayerInput(movements);
-            
-            switch (i) {
-                case 1: 
-                    p.setCurrentRoom(p.getCurrentRoom().getNorth());
-                    break;
-                case 2: 
-                    p.setCurrentRoom(p.getCurrentRoom().getEast());
-                    break;
-                case 3:
-                    p.setCurrentRoom(p.getCurrentRoom().getSouth());
-                    break;
-                case 4: 
-                    p.setCurrentRoom(p.getCurrentRoom().getWest());
-                    break;
-                    
-            }
-        }
-            
-        
+        c.move(p, tui, c);   
     }
     
 }
