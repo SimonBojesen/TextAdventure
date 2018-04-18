@@ -16,39 +16,59 @@ public class Room {
     private Room south;
     private Room west;
     private Room east;
+    private Item item;
 
+    
     public Room(String roomName, String description) {
         this.roomName = roomName;
         this.description = description;
     }
+    
     public String getRoomName() {
         return roomName;
     }
+    
     public Room getNorth() {
         return north;
     }
+    
     public void setNorth(Room north) {
         this.north = north;
     }
+    
     public Room getSouth() {
         return south;
     }
+    
     public void setSouth(Room south) {
         this.south = south;
     }
+    
     public Room getWest() {
         return west;
     }
+    
     public void setWest(Room west) {
         this.west = west;
     }
+    
     public Room getEast() {
         return east;
     }
+    
     public void setEast(Room east) {
         this.east = east;
     }
+    
     public String getDescription() {
         return description;
+    }
+    
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

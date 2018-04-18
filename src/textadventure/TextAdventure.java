@@ -21,7 +21,7 @@ public class TextAdventure {
         Room startroom = c.mapGen();
         Player p = c.playerGen(startroom);
         tui.gameStart(p);
-        c.move(p, tui, c);   
+        c.move(p, tui);   
     }
     
 }

@@ -149,6 +149,8 @@ public class Controller {
         return A4;
     }
     
+    
+    
     public Player playerGen(Room startroom) {
         Player player = new Player(startroom);  
         return player;
@@ -170,10 +172,11 @@ public class Controller {
         }
         return movements;
     }  
-    public void move(Player p, TUI t, Controller c) {
+    
+    public void move(Player p, TUI t) {
         while (true){
             t.getRoomDescription(p);
-            ArrayList<String> movements = c.getMoveOptions(p);
+            ArrayList<String> movements = getMoveOptions(p);
             int i = t.getPlayerInput(movements);
             
             switch (i) {

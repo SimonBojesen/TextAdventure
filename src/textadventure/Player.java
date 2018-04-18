@@ -15,27 +15,12 @@ public class Player {
     private String name = "Player";
     private int health = 100;
     private Room currentRoom;
-
+    private int exp;
     
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
         
     }
-    public Player() {
-        
-    }
-    
-    
-    
     public int getHealth() {
         return health;
     }
@@ -44,5 +29,19 @@ public class Player {
     }
     public void setHealth(int health) {
         this.health = health;
+    }
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+    
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 }
