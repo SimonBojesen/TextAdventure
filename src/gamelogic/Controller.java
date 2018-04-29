@@ -51,13 +51,13 @@ public class Controller {
 
         Monster m1 = new Monster("Giant Rat", "Just a big bad rat", 20, 5);
         Monster m2 = new Monster("Onikuma", "Demon-bear that steals horses", 40, 10);
-        Monster m3 = new Monster("Phoenix", "A fire elemental in the shape of a large bird", 50, 15);
-        Monster m4 = new Monster("Vampire", "Shapeshifting undead in the shape of either a human or a bat, which feed of the blood of it's victims", 60, 20);
-        Monster m5 = new Monster("Giant Ooze", "An acid amorphous or mutable creature without a single solid form", 65, 15);
+        Monster m3 = new Monster("Phoenix", "A fire elemental in the shape of a large bird", 50, 10);
+        Monster m4 = new Monster("Vampire", "Shapeshifting undead in the shape of either a human or a bat, which feed of the blood of it's victims", 60, 10);
+        Monster m5 = new Monster("Giant Ooze", "An acid amorphous or mutable creature without a single solid form", 65, 10);
         Monster m6 = new Monster("Shapeshifter", "A cant of doppelganger, it usually takes the form of it's victim to confuse his friends", 70, 10);
-        Monster m7 = new Monster("Ghost", "Wandering spirit, unable to get to heaven, because it is being held back because of some kind of regret from its past", 80, 25);
-        Monster gatekeeper = new Monster("GateKeeper", "It's a giant with a huge brick used as a kind of mace looks like he is guarding something", 100, 20);
-        Monster BigBoss = new Monster("Dragon-trump", "You stand across a huge dragon, with a weird haircut.", 150, 20);
+        Monster m7 = new Monster("Ghost", "Wandering spirit, unable to get to heaven, because it is being held back because of some kind of regret from its past", 80, 10);
+        Monster gatekeeper = new Monster("GateKeeper", "It's a giant with a huge brick used as a kind of mace looks like he is guarding something", 100, 10);
+        Monster BigBoss = new Monster("Dragon-trump", "You stand across a huge dragon, with a weird haircut.", 150, 15);
 
         Room A2 = new Room("A2 - rope room", "You walk into a `seemingly´ empty room.");
         Room A3 = new Room("A3 - Stone room", "You enter a small room that is only lit up by a still burning torch that lies on the ground. Next to it is a small rock that is a throwable size.");
@@ -520,4 +520,6 @@ public class Controller {
         }
         return false;
     }
+
+    
 }

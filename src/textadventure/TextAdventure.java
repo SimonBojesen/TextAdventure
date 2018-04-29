@@ -9,7 +9,6 @@ import gamelogic.Controller;
 import gamelogic.TUI;
 import superclasses.Room;
 import superclasses.Player;
-import java.util.ArrayList;
 
 
 /**
@@ -29,7 +28,7 @@ public class TextAdventure {
         tui.gameStart(p);
         
         //this is the gameloop
-        while(!c.getWinConditon(p)){
+        while(!c.getWinConditon(p) || !p.isIsDead()){
         c.checkCombat(p, tui);
         c.move(p, tui);  
         }
