@@ -10,7 +10,6 @@ import gamelogic.TUI;
 import superclasses.Room;
 import superclasses.Player;
 
-
 /**
  *
  * @author Simon
@@ -26,12 +25,15 @@ public class TextAdventure {
         Room startroom = c.mapGen();
         Player p = c.playerGen(startroom);
         tui.gameStart(p);
-        
+
         //this is the gameloop
-        while(!c.getWinConditon(p) || !p.isIsDead()){
-        c.checkCombat(p, tui);
-        c.move(p, tui);  
+        while (!c.getWinConditon(p) && !p.isIsDead()) {
+            c.checkCombat(p, tui);
+            if (!p.isIsDead()) {
+                c.move(p, tui);
+            }
+            
         }
     }
-    
+
 }

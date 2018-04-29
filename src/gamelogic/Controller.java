@@ -14,7 +14,9 @@ import superclasses.Monster;
 import superclasses.Obstacles;
 
 public class Controller {
+
     ArrayList<Room> rooms = new ArrayList();
+
     public Room mapGen() {
 
         Item rope = new Item("Rope", "You find a rope");
@@ -92,7 +94,7 @@ public class Controller {
         Room E4 = new Room("E4", "Lit candles are everywhere. It lights up a pathway to an huge altar. After further study you see a the altar is marked with paintings of a huge winged beast.");
         Room E6 = new Room("E6 - The exit", "You finally found the exit.");
         E6.setAccess(false);
-        
+
         rooms.add(A2);
         rooms.add(A3);
         rooms.add(A4);
@@ -121,7 +123,7 @@ public class Controller {
         A3.setItem(stone);
         A4.setItem(pot1);
         A5.setMonster(m5);
-        
+
         B3.setMonster(m1);
         B3.setItem(pot2);
         B4.setItem(pot1);
@@ -225,7 +227,7 @@ public class Controller {
         E4.setWest(E3);
 
         E6.setNorth(D6);
-        
+
         return A4;
     }
 
@@ -370,8 +372,7 @@ public class Controller {
                             p.setEquip(item);
                             p.setCurrentDmg(p.getBaseDmg() + item.getStatUp());
                             t.printStatUp();
-                        }
-                        else {
+                        } else {
                             t.getEquipError();
                         }
                     }
@@ -412,28 +413,27 @@ public class Controller {
         Monster monster = p.getCurrentRoom().getMonster();
         int counter = 0;
         t.printMonsterDetails(monster);
-        ArrayList<String> combat = getCombatCommands();
-        while (!monster.isIsDead()) {
+
+        while (!monster.isIsDead() && !p.isIsDead()) {
             if (counter % 2 != 0) {
                 //this happens when its the monsters turn
                 monsterAttack(p, t, monster);
-                counter++;
+                if (!p.isIsDead()) {
+                    counter++;
+                }
             } else {
                 //this happens when its the players turn
+                ArrayList<String> combat = getCombatCommands();
                 int i = t.getPlayerCombatInput(combat);
-                switch (i) {
-                    case 1:
-                        playerAttack(p, t, monster);
+                if (i == 1) {
+                    playerAttack(p, t, monster);
 
-                        if (!monster.isIsDead()) {
-                            counter++;
-                            break;
-                        }
-                        break;
-                    case 2:
-                        useItem(p, t);
+                    if (!monster.isIsDead()) {
                         counter++;
-                        break;
+                    }
+                } else if (i == 2) {
+                    useItem(p, t);
+                    counter++;
                 }
             }
         }
@@ -504,8 +504,7 @@ public class Controller {
             m.setIsDead(true);
             if (m.getName().equals("GateKeeper")) {
                 rooms.get(18).setAccess(true);
-            }
-            else if (m.getName().equals("Dragon-trump")) {
+            } else if (m.getName().equals("Dragon-trump")) {
                 rooms.get(22).setAccess(true);
             }
             return true;
@@ -521,5 +520,4 @@ public class Controller {
         return false;
     }
 
-    
 }
