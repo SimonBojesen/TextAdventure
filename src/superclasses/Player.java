@@ -9,7 +9,7 @@ import superclasses.Item;
 import java.util.ArrayList;
 /**
  *
- * @author Simon, Arik, Rasmus Porse
+ * @author Simon
  */
 public class Player {
     private String name = "Player";
