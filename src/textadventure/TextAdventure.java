@@ -31,6 +31,7 @@ public class TextAdventure {
         
         //this is the gameloop
         while(true){
+        c.checkCombat(p, tui);
         c.move(p, tui);  
         }
     }

@@ -5,6 +5,7 @@ import superclasses.Item;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import superclasses.Monster;
 
 /**
  *
@@ -120,4 +121,49 @@ public class TUI {
     public void getError() {
         System.out.println("this item has no use effect in the current room.\n");
     }
+
+    public void printMonsterDetails(Monster monster) {
+        System.out.println("You get attacked by " + monster.getName());
+        System.out.println(monster.getDescription() + "\n");
+    }
+
+    public void potErrorMsg() {
+        System.out.println("You are already at max health.\n");
+    }
+
+    public void printCurrentHealth(Player p) {
+        System.out.println("Your health is now: " + p.getHealth() + "\n");
+    }
+
+    public int getPlayerCombatInput(ArrayList<String> combat) {
+        while (true) {
+            for (int i = 0; i < combat.size(); i++) {
+                System.out.println(combat.get(i));
+            }
+            System.out.println("What will you do?\n");
+
+            String x = sc.next();
+
+            for (int i = 0; i < combat.size(); i++) {
+                if (combat.get(i).substring("Press ".length(), "Press ".length() + 1).equals(x)) {
+                    int c = Integer.parseInt(x);
+                    return c;
+
+                }
+
+            }
+            System.out.println("Please choose a valid option.\n");
+        }
+    }
+
+    public void printMonsterHealth(Monster m) {
+        System.out.println("Monster health: " + m.getHealth() + "\n");
+    }
+
+
+    public void printPlayerHealth(Player p) {
+        System.out.println("Player health: " + p.getHealth() + "\n");
+    }
+
+    
 }

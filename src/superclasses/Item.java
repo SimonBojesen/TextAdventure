@@ -10,9 +10,12 @@ package superclasses;
  * @author Simon
  */
 public class Item {
+
     private String name;
     private String description;
     private String itemType;
+    private int statUp;
+
     private boolean access = true;
 
     public String getItemType() {
@@ -23,18 +26,11 @@ public class Item {
         this.itemType = itemType;
     }
 
-    public boolean isAccess() {
-        return access;
-    }
-
-    public void setAccess(boolean access) {
-        this.access = access;
-    }
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -50,8 +46,20 @@ public class Item {
     public void setDescription(String Description) {
         this.description = Description;
     }
+
+    public int getStatUp() {
+        return statUp;
+    }
+
+    public void setStatUp(int statUp) {
+        this.statUp = statUp;
+    }
     
-    public void use(Player p){
-        
+    public boolean isAccess() {
+        return access;
+    }
+
+    public void setAccess(boolean access) {
+        this.access = access;
     }
 }

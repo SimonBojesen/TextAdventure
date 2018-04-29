@@ -5,11 +5,11 @@
  */
 package gamelogic;
 
-import gamelogic.TUI;
 import superclasses.Room;
 import superclasses.Player;
 import superclasses.Item;
 import java.util.ArrayList;
+import java.util.Random;
 import superclasses.Monster;
 import superclasses.Obstacles;
 
@@ -34,8 +34,11 @@ public class Controller {
         sword.setItemType("equipable");
         key.setItemType("consumable");
         pot1.setItemType("consumable");
+        pot1.setStatUp(25);
         pot2.setItemType("consumable");
+        pot2.setStatUp(50);
         pot3.setItemType("consumable");
+        pot3.setStatUp(100);
 
         Obstacles chest = new Obstacles("chest", "The chest is locked");
         Obstacles vase = new Obstacles("vase", "Its an ancient vase made of clay.");
@@ -49,7 +52,7 @@ public class Controller {
         Monster m2 = new Monster("Onikuma", "Demon-bear that steals horses", 10, 40);
         Monster m3 = new Monster("Phoenix", "A magical bird which can use firemagic", 15, 50);
         Monster m4 = new Monster("Vampire", "Shapeshifting undead in the shape of either a human or a bat, which feed of the blood of it's victims", 20, 60);
-        
+
         Room A2 = new Room("A2 - rope room", "You walk into a `seemingly´ empty room.");
         Room A3 = new Room("A3 - Stone room", "You enter a small room that is only lit up by a still burning torch that lies on the ground. Next to it is a small rock that is a throwable size.");
         Room A4 = new Room("A4 - Startroom", "There is a small hole at the top of the cave. It lightens up the room which shows you 3 paths.");
@@ -86,14 +89,17 @@ public class Controller {
 
         A2.setItem(rope);
         A3.setItem(stone);
+        B3.setMonster(m1);
         B4.setItem(pot1);
 
         B5.setObstacle(chest);
         B5.setItem(scroll);
         scroll.setAccess(false);
+        B6.setMonster(m3);
 
         C3.setItem(pickaxe);
         C4.setItem(pot2);
+        C5.setMonster(m2);
 
         D2.setObstacle(well);
         D2.setItem(sword);
@@ -104,6 +110,7 @@ public class Controller {
         key.setAccess(false);
 
         E2.setItem(pot3);
+        E3.setMonster(m4);
 
         A2.setEast(A3);
 
@@ -296,7 +303,7 @@ public class Controller {
                     if ("consumable".equals(item.getItemType())) {
                         //hvis input er en potion kører den usePotion logik
                         if ("Small HealthPotion".equals(item.getName()) || "HealthPotion".equals(item.getName()) || "Big HealthPotion".equals(item.getName())) {
-                            usePotion(item);
+                            usePotion(item, p, t);
                         } else if (obs != null) {
                             if (obs.getUseThisToRemoveObstacle().equals(item)) {
                                 cur.getItem().setAccess(true);
@@ -304,14 +311,15 @@ public class Controller {
                                 p.removeItemFromInventory(item);
                                 break;
                             }
-                        } else if (cur.getSouth().getUseThisToAccessRoom() != null) {
-                            if (cur.getSouth().getUseThisToAccessRoom().equals(item)) {
-                                cur.getSouth().setAccess(true);
-                                t.printUseItem(item);
-                                p.removeItemFromInventory(item);
-                                break;
+                        } else if (cur.getSouth() != null) {
+                            if (cur.getSouth().getUseThisToAccessRoom() != null) {
+                                if (cur.getSouth().getUseThisToAccessRoom().equals(item)) {
+                                    cur.getSouth().setAccess(true);
+                                    t.printUseItem(item);
+                                    p.removeItemFromInventory(item);
+                                    break;
+                                }
                             }
-
                         } else {
                             t.getError();
                         }
@@ -326,7 +334,124 @@ public class Controller {
         }
     }
 
-    private void usePotion(Item item) {
+    private void usePotion(Item item, Player p, TUI t) {
+        if (p.getHealth() < 100) {
+            if (p.getHealth() + item.getStatUp() > 100) {
+                p.setHealth(100);
+                t.printCurrentHealth(p);
+            } else {
+                p.setHealth(p.getHealth() + item.getStatUp());
+                t.printCurrentHealth(p);
+            }
+        } else {
+            t.potErrorMsg();
+        }
+    }
 
+    public void checkCombat(Player p, TUI t) {
+        Room cur = p.getCurrentRoom();
+
+        if (cur.getMonster() != null) {
+            if (!cur.getMonster().isIsDead()) {
+                runCombat(p, t);
+            }
+        }
+    }
+
+    private void runCombat(Player p, TUI t) {
+        Monster monster = p.getCurrentRoom().getMonster();
+        int counter = 0;
+        t.printMonsterDetails(monster);
+        ArrayList<String> combat = getCombatCommands();
+        while (monster.isIsDead() == false) {
+            if (counter % 2 != 0) {
+                //this happens when its the monsters turn
+                monsterAttack(p, t, monster);
+                counter++;
+            } else {
+                //this happens when its the players turn
+                int i = t.getPlayerCombatInput(combat);
+                switch (i) {
+                    case 1:
+                        playerAttack(p, t, monster);
+                        
+                        if (!monster.isIsDead()) {
+                            counter++;
+                            break;
+                        }
+                        
+                    case 2:
+                        useItem(p, t);
+                        counter++;
+                        break;
+                }
+            }
+        }
+
+    }
+
+    private ArrayList<String> getCombatCommands() {
+        ArrayList<String> combat = new ArrayList();
+        combat.add("Press 1 for attack");
+        combat.add("Press 2 to use item");
+        return combat;
+    }
+
+    private void playerAttack(Player p, TUI t, Monster m) {
+        Random r = new Random();
+        int i = 0;
+        switch (r.nextInt(3)) {
+            case 0:
+                System.out.println("You hit the target.\n");
+                m.setHealth(m.getHealth() - p.getBaseDmg());
+                t.printMonsterHealth(m);
+                checkDead(p, m, i);
+                break;
+            case 1:
+                System.out.println("You missed.\n");
+                break;
+            case 2:
+                System.out.println("You critical hit for twice your damageoutput.\n");
+                m.setHealth(m.getHealth() - p.getBaseDmg() * 2);
+                t.printMonsterHealth(m);
+                checkDead(p, m, i);
+                break;
+        }
+    }
+
+    private void monsterAttack(Player p, TUI t, Monster monster) {
+        Random r = new Random();
+        int i = 0;
+        switch (r.nextInt(3)) {
+            case 0:
+                System.out.println("The " + monster.getName() + " hits.");
+                p.setHealth(p.getHealth() - monster.getDmg());
+                t.printPlayerHealth(p);
+                checkDead(p, monster, i);
+
+                break;
+            case 1:
+                System.out.println("The " + monster.getName() + " missed.");
+                break;
+            case 2:
+                System.out.println("The " + monster.getName() + " critical hits you for twice its damageoutput.");
+                p.setHealth(p.getHealth() - monster.getDmg() * 2);
+                t.printCurrentHealth(p);
+                checkDead(p, monster, i);
+                break;
+        }
+    }
+
+    private void checkDead(Player p, Monster m, int i) {
+        if (i == 0) {
+            if (p.getHealth() <= 0) {
+                System.out.println("You are dead");
+            }
+        } else if (i == 1) {
+            if (m.getHealth() <= 0) {
+                System.out.println("You defeat the monster");
+                m.setIsDead(true);
+            }
+        }
     }
 }

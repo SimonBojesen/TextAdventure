@@ -10,10 +10,20 @@ package superclasses;
  * @author Simon
  */
 public class Monster {
+
     private String name;
     private String description;
     private int health;
     private int dmg;
+    private boolean isDead = false;
+
+    public boolean isIsDead() {
+        return isDead;
+    }
+
+    public void setIsDead(boolean isDead) {
+        this.isDead = isDead;
+    }
 
     public Monster(String name, String description, int health, int dmg) {
         this.name = name;
@@ -28,6 +38,14 @@ public class Monster {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getHealth() {
@@ -45,5 +63,5 @@ public class Monster {
     public void setDmg(int dmg) {
         this.dmg = dmg;
     }
-    
+
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Player {
     private String name = "Player";
-    private int health = 100;
+    private int baseHealth = 100;
     private int baseDmg = 10;
     private Room currentRoom;
     private ArrayList<Item> inventory;
@@ -27,13 +27,13 @@ public class Player {
         inventory = new ArrayList();
     }
     public int getHealth() {
-        return health;
+        return baseHealth;
     }
     public String getName() {
         return name;
     }
     public void setHealth(int health) {
-        this.health = health;
+        this.baseHealth = health;
     }
     public Room getCurrentRoom() {
         return currentRoom;
@@ -46,5 +46,13 @@ public class Player {
     }
     public void removeItemFromInventory(Item i) {
         this.inventory.remove(i);
+    }
+    
+    public int getBaseDmg() {
+        return baseDmg;
+    }
+
+    public void setBaseDmg(int baseDmg) {
+        this.baseDmg = baseDmg;
     }
 }
