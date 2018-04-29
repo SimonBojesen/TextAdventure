@@ -23,9 +23,9 @@ public class Controller {
         Item pickaxe = new Item("Pickaxe", "You find a pickaxe");
         Item sword = new Item("Well", "You find a sword");
         Item key = new Item("Key", "You find an old key");
-        Item pot1 = new Item("Small HealthPotion", "You found a small healthpotion");
+        Item pot1 = new Item("smallHealthPotion", "You found a small healthpotion");
         Item pot2 = new Item("HealthPotion", "You found a healthpotion");
-        Item pot3 = new Item("Big HealthPotion", "You found a big healthpotion");
+        Item pot3 = new Item("bigHealthPotion", "You found a big healthpotion");
 
         rope.setItemType("consumable");
         stone.setItemType("consumable");
@@ -337,7 +337,7 @@ public class Controller {
                     //Hvis item typen er consumable udføre den logikken her
                     if ("consumable".equals(item.getItemType())) {
                         //hvis input er en potion kører den usePotion logik
-                        if ("Small HealthPotion".equals(item.getName()) || "HealthPotion".equals(item.getName()) || "Big HealthPotion".equals(item.getName())) {
+                        if ("smallHealthPotion".equalsIgnoreCase(input) || "HealthPotion".equalsIgnoreCase(input) || "bigHealthPotion".equalsIgnoreCase(input)) {
                             usePotion(item, p, t);
                         } else if (obs != null) {
                             if (obs.getUseThisToRemoveObstacle().equals(item)) {
