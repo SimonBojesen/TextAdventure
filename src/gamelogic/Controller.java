@@ -119,16 +119,21 @@ public class Controller {
 
         A2.setItem(rope);
         A3.setItem(stone);
+        A4.setItem(pot1);
         A5.setMonster(m5);
+        
         B3.setMonster(m1);
+        B3.setItem(pot2);
         B4.setItem(pot1);
 
         B5.setObstacle(chest);
         B5.setItem(scroll);
         scroll.setAccess(false);
         B6.setMonster(m3);
+        B6.setItem(pot2);
 
         C2.setMonster(gatekeeper);
+        C2.setItem(pot3);
         C3.setItem(pickaxe);
         C3.setMonster(m6);
         C4.setItem(pot2);
@@ -143,6 +148,7 @@ public class Controller {
         D5.setItem(key);
         key.setAccess(false);
         E1.setMonster(BigBoss);
+        E1.setItem(pot3);
         E2.setItem(pot3);
         E3.setMonster(m4);
 
