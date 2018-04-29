@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package textadventure;
+package superclasses;
 
 /**
  *
@@ -12,12 +12,43 @@ package textadventure;
 public class Room {
     private String roomName;
     private String description;
+    
     private Room north;
     private Room south;
     private Room west;
     private Room east;
+    private boolean access = true;
     private Item item;
+    private Obstacles obstacle;
+    private Monster monster;
+    private Item useThisToAccessRoom;
 
+    public Item getUseThisToAccessRoom() {
+        return useThisToAccessRoom;
+    }
+
+    public void setUseThisToAccessRoom(Item useThisToAccessRoom) {
+        this.useThisToAccessRoom = useThisToAccessRoom;
+    }
+
+    public Obstacles getObstacle() {
+        return obstacle;
+    }
+
+    public void setObstacle(Obstacles obstacle) {
+        this.obstacle = obstacle;
+    }
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public void setAccess(boolean access) {
+        this.access = access;
+    }
     
     public Room(String roomName, String description) {
         this.roomName = roomName;
@@ -63,12 +94,16 @@ public class Room {
     public String getDescription() {
         return description;
     }
+
+    public boolean isAccess() {
+        return access;
+    }
     
-    public Item getItem() {
-        return item;
+    public Monster getMonster() {
+        return monster;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setMonster(Monster monster) {
+        this.monster = monster;
     }
 }

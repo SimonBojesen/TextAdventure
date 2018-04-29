@@ -18,12 +18,12 @@ public class TestTUI {
     
     @Test
     public void testWest(){
-        textadventure.Room C4 = new textadventure.Room("C4","Start");
-        textadventure.Room C3 = new textadventure.Room("C3","Slut");
+        superclasses.Room C4 = new superclasses.Room("C4","Start");
+        superclasses.Room C3 = new superclasses.Room("C3","Slut");
         C4.setWest(C3);
-        textadventure.Player p = new textadventure.Player(C4);
+        superclasses.Player p = new superclasses.Player(C4);
         p.setCurrentRoom(C4);
-        textadventure.Controller c = new textadventure.Controller();
+        gamelogic.Controller c = new gamelogic.Controller();
         ArrayList<String> movements = c.getMoveOptions(p);
         
         if (movements.contains("Press 4 to go West")) {
@@ -32,44 +32,45 @@ public class TestTUI {
         
         assertEquals("Slut", p.getCurrentRoom().getDescription());
     }
+    
     @Test
     public void testEast(){
-        textadventure.Room C4 = new textadventure.Room("C4","Start");
-        textadventure.Room C3 = new textadventure.Room("C3","Slut");
+        superclasses.Room C4 = new superclasses.Room("C4","Start");
+        superclasses.Room C3 = new superclasses.Room("C3","Slut");
         C4.setEast(C3);
-        textadventure.Player p = new textadventure.Player(C4);
+        superclasses.Player p = new superclasses.Player(C4);
         p.setCurrentRoom(C4);
-        textadventure.Controller c = new textadventure.Controller();
+        gamelogic.Controller c = new gamelogic.Controller();
         ArrayList<String> movements = c.getMoveOptions(p);
-        
         if (movements.contains("Press 2 to go East")) {
             p.setCurrentRoom(C3);
         }
-        
         assertEquals("Slut", p.getCurrentRoom().getDescription());
     }
+    
     @Test
     public void testNorth(){
-        textadventure.Room C4 = new textadventure.Room("C4","Start");
-        textadventure.Room C3 = new textadventure.Room("C3","Slut");
+        superclasses.Room C4 = new superclasses.Room("C4","Start");
+        superclasses.Room C3 = new superclasses.Room("C3","Slut");
         C4.setNorth(C3);
-        textadventure.Player p = new textadventure.Player(C4);
+        superclasses.Player p = new superclasses.Player(C4);
         p.setCurrentRoom(C4);
-        textadventure.Controller c = new textadventure.Controller();
+        gamelogic.Controller c = new gamelogic.Controller();
         ArrayList<String> movements = c.getMoveOptions(p);
         if (movements.contains("Press 1 to go North")) {
             p.setCurrentRoom(C3);
         }
         assertEquals("Slut", p.getCurrentRoom().getDescription());
     }
+    
     @Test
     public void testSouth(){
-        textadventure.Room C4 = new textadventure.Room("C4","Start");
-        textadventure.Room C3 = new textadventure.Room("C3","Slut");
+        superclasses.Room C4 = new superclasses.Room("C4","Start");
+        superclasses.Room C3 = new superclasses.Room("C3","Slut");
         C4.setSouth(C3);
-        textadventure.Player p = new textadventure.Player(C4);
+        superclasses.Player p = new superclasses.Player(C4);
         p.setCurrentRoom(C4);
-        textadventure.Controller c = new textadventure.Controller();
+        gamelogic.Controller c = new gamelogic.Controller();
         ArrayList<String> movements = c.getMoveOptions(p);
         if (movements.contains("Press 3 to go South")) {
             p.setCurrentRoom(C3);

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package textadventure;
+package superclasses;
 
+import superclasses.Item;
 import java.util.ArrayList;
-
 /**
  *
  * @author Simon, Arik, Rasmus Porse
@@ -14,12 +14,17 @@ import java.util.ArrayList;
 public class Player {
     private String name = "Player";
     private int health = 100;
+    private int baseDmg = 10;
     private Room currentRoom;
-    private int exp;
+    private ArrayList<Item> inventory;
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
     
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
-        
+        inventory = new ArrayList();
     }
     public int getHealth() {
         return health;
@@ -36,12 +41,10 @@ public class Player {
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
-    
-    public int getExp() {
-        return exp;
+    public void addItemToInventory(Item i) {
+        this.inventory.add(i);
     }
-
-    public void setExp(int exp) {
-        this.exp = exp;
+    public void removeItemFromInventory(Item i) {
+        this.inventory.remove(i);
     }
 }

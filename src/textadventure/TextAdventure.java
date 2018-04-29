@@ -5,6 +5,12 @@
  */
 package textadventure;
 
+import gamelogic.Controller;
+import gamelogic.TUI;
+import superclasses.Room;
+import superclasses.Player;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -20,8 +26,13 @@ public class TextAdventure {
         TUI tui = new TUI();
         Room startroom = c.mapGen();
         Player p = c.playerGen(startroom);
+        
         tui.gameStart(p);
-        c.move(p, tui);   
+        
+        //this is the gameloop
+        while(true){
+        c.move(p, tui);  
+        }
     }
     
 }
