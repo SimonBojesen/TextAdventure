@@ -14,7 +14,7 @@ import superclasses.Monster;
 import superclasses.Obstacles;
 
 public class Controller {
-
+    ArrayList<Room> rooms = new ArrayList();
     public Room mapGen() {
 
         Item rope = new Item("Rope", "You find a rope");
@@ -32,6 +32,7 @@ public class Controller {
         scroll.setItemType("consumable");
         pickaxe.setItemType("consumable");
         sword.setItemType("equipable");
+        sword.setStatUp(10);
         key.setItemType("consumable");
         pot1.setItemType("consumable");
         pot1.setStatUp(25);
@@ -48,10 +49,15 @@ public class Controller {
         vase.setUseThisToRemoveObstacle(stone);
         well.setUseThisToRemoveObstacle(rope);
 
-        Monster m1 = new Monster("Giant Rat", "Just a big bad rat", 5, 20);
-        Monster m2 = new Monster("Onikuma", "Demon-bear that steals horses", 10, 40);
-        Monster m3 = new Monster("Phoenix", "A magical bird which can use firemagic", 15, 50);
-        Monster m4 = new Monster("Vampire", "Shapeshifting undead in the shape of either a human or a bat, which feed of the blood of it's victims", 20, 60);
+        Monster m1 = new Monster("Giant Rat", "Just a big bad rat", 20, 5);
+        Monster m2 = new Monster("Onikuma", "Demon-bear that steals horses", 40, 10);
+        Monster m3 = new Monster("Phoenix", "A fire elemental in the shape of a large bird", 50, 15);
+        Monster m4 = new Monster("Vampire", "Shapeshifting undead in the shape of either a human or a bat, which feed of the blood of it's victims", 60, 20);
+        Monster m5 = new Monster("Giant Ooze", "An acid amorphous or mutable creature without a single solid form", 65, 15);
+        Monster m6 = new Monster("Shapeshifter", "A cant of doppelganger, it usually takes the form of it's victim to confuse his friends", 70, 10);
+        Monster m7 = new Monster("Ghost", "Wandering spirit, unable to get to heaven, because it is being held back because of some kind of regret from its past", 80, 25);
+        Monster gatekeeper = new Monster("GateKeeper", "It's a giant with a huge brick used as a kind of mace looks like he is guarding something", 100, 20);
+        Monster BigBoss = new Monster("Dragon-trump", "You stand across a huge dragon, with a weird haircut.", 150, 20);
 
         Room A2 = new Room("A2 - rope room", "You walk into a `seemingly´ empty room.");
         Room A3 = new Room("A3 - Stone room", "You enter a small room that is only lit up by a still burning torch that lies on the ground. Next to it is a small rock that is a throwable size.");
@@ -78,17 +84,42 @@ public class Controller {
         Room D5 = new Room("D5 - The Dark Room", "What is that sound and why is this room so dark??!! Well fuck it… Let me feel around. I wish I had a flashlight… Actually I wish I had a million dollars. Oh tiny fairy… WHERE ARE YOU??!!  ");
         Room D6 = new Room("D6 - The WHY Room", "YEEESSSS finally I get a little success. I knew there was something fishy about that wall. Good thing I was listening to my instincts. But why am I still in this shit hole….");
         D6.setAccess(false);
-        D6.setUseThisToAccessRoom(scroll);
+        D6.setUseThisToAccessRoom(pickaxe);
 
         Room E1 = new Room("E1 - BigBoss Donald Trump", "You have finally reached the BigBoss Donald Trump Dragon! Good Job! The dragon breathes out flames, telling you to come at him.\nHope you are ready for this. FIGHT.");
         Room E2 = new Room("E2", "This room has an eerie feeling to it.");
         Room E3 = new Room("E3", "You only see a small passage which can narrowly pass through.");
         Room E4 = new Room("E4", "Lit candles are everywhere. It lights up a pathway to an huge altar. After further study you see a the altar is marked with paintings of a huge winged beast.");
-        Room E6 = new Room("E6 - The Secret", "Hmmmm… Wait a second… A dead end??!! WTF!!!!! This can’t be right??? There has to bee something I missed along the way. Why would that wall be closed up, if not to hide something? I better explore some more..");
+        Room E6 = new Room("E6 - The exit", "You finally found the exit.");
         E6.setAccess(false);
+        
+        rooms.add(A2);
+        rooms.add(A3);
+        rooms.add(A4);
+        rooms.add(A5);
+        rooms.add(B3);
+        rooms.add(B4);
+        rooms.add(B5);
+        rooms.add(B6);
+        rooms.add(C2);
+        rooms.add(C3);
+        rooms.add(C4);
+        rooms.add(C5);
+        rooms.add(C6);
+        rooms.add(D2);
+        rooms.add(D3);
+        rooms.add(D4);
+        rooms.add(D5);
+        rooms.add(D6);
+        rooms.add(E1);
+        rooms.add(E2);
+        rooms.add(E3);
+        rooms.add(E4);
+        rooms.add(E6);
 
         A2.setItem(rope);
         A3.setItem(stone);
+        A5.setMonster(m5);
         B3.setMonster(m1);
         B4.setItem(pot1);
 
@@ -97,7 +128,9 @@ public class Controller {
         scroll.setAccess(false);
         B6.setMonster(m3);
 
+        C2.setMonster(gatekeeper);
         C3.setItem(pickaxe);
+        C3.setMonster(m6);
         C4.setItem(pot2);
         C5.setMonster(m2);
 
@@ -105,10 +138,11 @@ public class Controller {
         D2.setItem(sword);
         sword.setAccess(false);
 
+        D3.setMonster(m7);
         D5.setObstacle(vase);
         D5.setItem(key);
         key.setAccess(false);
-
+        E1.setMonster(BigBoss);
         E2.setItem(pot3);
         E3.setMonster(m4);
 
@@ -185,12 +219,13 @@ public class Controller {
         E4.setWest(E3);
 
         E6.setNorth(D6);
-
+        
         return A4;
     }
 
     public Player playerGen(Room startroom) {
         Player player = new Player(startroom);
+        player.setCurrentDmg(player.getBaseDmg());
         return player;
     }
 
@@ -254,7 +289,7 @@ public class Controller {
                 useItem(p, t);
 
         }
-        System.out.println(p.getCurrentRoom().getRoomName());
+        System.out.println(p.getCurrentRoom().getDescription());
     }
 
     private void exploreLogic(Player p, TUI t) {
@@ -325,7 +360,14 @@ public class Controller {
                         }
                     } //Hvis item typen er equipable udføre den logikken her
                     else if ("equipable".equals(item.getItemType())) {
-
+                        if (!p.getEquip().equals(item)) {
+                            p.setEquip(item);
+                            p.setCurrentDmg(p.getBaseDmg() + item.getStatUp());
+                            t.printStatUp();
+                        }
+                        else {
+                            t.getEquipError();
+                        }
                     }
                 }
             }
@@ -339,9 +381,11 @@ public class Controller {
             if (p.getHealth() + item.getStatUp() > 100) {
                 p.setHealth(100);
                 t.printCurrentHealth(p);
+                p.removeItemFromInventory(item);
             } else {
                 p.setHealth(p.getHealth() + item.getStatUp());
                 t.printCurrentHealth(p);
+                p.removeItemFromInventory(item);
             }
         } else {
             t.potErrorMsg();
@@ -363,7 +407,7 @@ public class Controller {
         int counter = 0;
         t.printMonsterDetails(monster);
         ArrayList<String> combat = getCombatCommands();
-        while (monster.isIsDead() == false) {
+        while (!monster.isIsDead()) {
             if (counter % 2 != 0) {
                 //this happens when its the monsters turn
                 monsterAttack(p, t, monster);
@@ -374,12 +418,12 @@ public class Controller {
                 switch (i) {
                     case 1:
                         playerAttack(p, t, monster);
-                        
+
                         if (!monster.isIsDead()) {
                             counter++;
                             break;
                         }
-                        
+                        break;
                     case 2:
                         useItem(p, t);
                         counter++;
@@ -387,7 +431,6 @@ public class Controller {
                 }
             }
         }
-
     }
 
     private ArrayList<String> getCombatCommands() {
@@ -399,59 +442,76 @@ public class Controller {
 
     private void playerAttack(Player p, TUI t, Monster m) {
         Random r = new Random();
-        int i = 0;
+
         switch (r.nextInt(3)) {
             case 0:
                 System.out.println("You hit the target.\n");
-                m.setHealth(m.getHealth() - p.getBaseDmg());
-                t.printMonsterHealth(m);
-                checkDead(p, m, i);
+                m.setHealth(m.getHealth() - p.getCurrentDmg());
+                if (!checkDead(p, m)) {
+                    t.printMonsterHealth(m);
+                }
                 break;
             case 1:
                 System.out.println("You missed.\n");
                 break;
             case 2:
                 System.out.println("You critical hit for twice your damageoutput.\n");
-                m.setHealth(m.getHealth() - p.getBaseDmg() * 2);
-                t.printMonsterHealth(m);
-                checkDead(p, m, i);
+                m.setHealth(m.getHealth() - (p.getCurrentDmg() * 2));
+                if (!checkDead(p, m)) {
+                    t.printMonsterHealth(m);
+                }
                 break;
         }
     }
 
     private void monsterAttack(Player p, TUI t, Monster monster) {
         Random r = new Random();
-        int i = 0;
         switch (r.nextInt(3)) {
             case 0:
                 System.out.println("The " + monster.getName() + " hits.");
                 p.setHealth(p.getHealth() - monster.getDmg());
-                t.printPlayerHealth(p);
-                checkDead(p, monster, i);
-
+                if (!checkDead(p, monster)) {
+                    t.printPlayerHealth(p);
+                }
                 break;
             case 1:
                 System.out.println("The " + monster.getName() + " missed.");
                 break;
             case 2:
                 System.out.println("The " + monster.getName() + " critical hits you for twice its damageoutput.");
-                p.setHealth(p.getHealth() - monster.getDmg() * 2);
-                t.printCurrentHealth(p);
-                checkDead(p, monster, i);
+                p.setHealth(p.getHealth() - (monster.getDmg() * 2));
+                if (!checkDead(p, monster)) {
+                    t.printPlayerHealth(p);
+                }
                 break;
         }
     }
 
-    private void checkDead(Player p, Monster m, int i) {
-        if (i == 0) {
-            if (p.getHealth() <= 0) {
-                System.out.println("You are dead");
-            }
-        } else if (i == 1) {
-            if (m.getHealth() <= 0) {
-                System.out.println("You defeat the monster");
-                m.setIsDead(true);
-            }
+    private boolean checkDead(Player p, Monster m) {
+        if (p.getHealth() <= 0) {
+            System.out.println("You are dead");
+            p.setIsDead(true);
+            return true;
         }
+        if (m.getHealth() <= 0) {
+            System.out.println("You defeat the monster!\n");
+            m.setIsDead(true);
+            if (m.getName().equals("GateKeeper")) {
+                rooms.get(18).setAccess(true);
+            }
+            else if (m.getName().equals("Dragon-trump")) {
+                rooms.get(22).setAccess(true);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getWinConditon(Player p) {
+        if (p.getCurrentRoom().equals(rooms.get(22))) {
+            System.out.println("you've found the exit, gongratulations you win the game!");
+            return true;
+        }
+        return false;
     }
 }

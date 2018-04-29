@@ -165,5 +165,13 @@ public class TUI {
         System.out.println("Player health: " + p.getHealth() + "\n");
     }
 
+    public void getEquipError() {
+        System.out.println("This item is already equipped.\n");
+    }
+
+    void printStatUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

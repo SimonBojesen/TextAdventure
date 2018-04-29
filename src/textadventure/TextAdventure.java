@@ -26,11 +26,10 @@ public class TextAdventure {
         TUI tui = new TUI();
         Room startroom = c.mapGen();
         Player p = c.playerGen(startroom);
-        
         tui.gameStart(p);
         
         //this is the gameloop
-        while(true){
+        while(!c.getWinConditon(p)){
         c.checkCombat(p, tui);
         c.move(p, tui);  
         }
